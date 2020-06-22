@@ -1,0 +1,76 @@
+﻿@model WebApplication1.Areas.ModulKorisnik.ViewModels.Narudzba.NarudzbaDetaljiRacunVM
+
+@using WebApplication1.Helper
+@using WebApplication1.Models
+@using Microsoft.AspNetCore.Http
+
+
+@{
+    ViewData["Title"] = "Narudzba";
+    int br = 0;
+    var porukaDelete = TempData["porukaDelete"] as string;
+    KorisnickiNalog korisnik = Context.GetLogiraniKorisnik();
+    float ukupno = 0;
+    double cijene = 0;
+}
+
+
+
+<div class="row">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Vasa korpa</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <table id="datatable" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>RB</th>
+                        <th>Jelo</th>
+                        <th>Cijena(kom)</th>
+                        <th>Količina</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ foreach (var ns in Model.Rows)
+                        {
+                            <tr>
+                                @{
+                                    br++;
+                                }
+                                <td>@br</td>
+                                @foreach (var j in ns.Jela)
+                                {
+                                    <td>@j.Naziv</td>
+                                    <td>@j.Cijena KM</td>
+
+                                    ukupno = ukupno + j.Cijena  * ns.Kolicina;
+
+                                }
+
+
+                                <td>@ns.Kolicina kom</td>
+                                
+                            </tr>
+
+                        }
+                    }
+
+                </tbody>
+
+            </table>
+            <a asp-controller="Narudzba" asp-route-id="@Model.NarudzbaId" asp-action="DodajStavke" class="btn btn-success">Dodaj novo jelo</a>
+            <a asp-controller="Narudzba" asp-route-id="@Model.NarudzbaId" asp-action="Detalji" class="btn btn-danger">Zavrsi narudzbu</a>
+            @{
+                cijene = ukupno / 1.17;
+
+            }
+            <div style="float:right">
+                <h3>Cijena bez pdv-a: @Math.Round(cijene, 2) KM</h3>
+                <h3>Iznos pdv-a: @Math.Round(ukupno - cijene, 2) KM</h3>
+                <h3>Ukupna cijena: @ukupno KM</h3>
+            </div>
+        </div>
+    </div>
+</div>

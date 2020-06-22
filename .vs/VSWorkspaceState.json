@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\webapp",
+    "\\webapp\\online_restoran_app",
+    "\\webapp\\online_restoran_app\\WebApplication1",
+    "\\webapp\\online_restoran_app\\WebApplication1\\EF",
+    "\\webapp\\online_restoran_app\\WebApplication1\\Migrations",
+    "\\webapp\\online_restoran_app\\WebApplication1\\Models"
+  ],
+  "SelectedNode": "\\webapp\\online_restoran_app\\WebApplication1\\EF\\MyContext.cs",
+  "PreviewInSolutionExplorer": false
+}
